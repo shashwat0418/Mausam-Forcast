@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mausam-Forcast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .boady{
+            background-color: #33186B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mid{
+            
+            width: 90%;
+            height: 1000px;
+            border-radius: 20px;
+           
+            position: relative;
+            
+        }
+        .header{
+            position: inherit;
+            width: 100%;
+            
+            height:50px;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header p , .uthar{font-size: 18px;
+            font-family: Georgia, serif;
+  font-weight: bold;
+  text-align: center;
+color: aliceblue;
+}
+.mid1{
+    width: 100%;
+    height: 500px;        
+    border-radius: 20px;
+    background-image: url("rain\ aesthetic.jpg");
+  background-size: cover; /* Optional: Adjust to cover the entire viewport */
+  background-position: center; /* Optional: Center the image */
+  background-repeat: no-repeat; /* Optional: Prevent image repetition */
+}
+.mid1child{
+    width: 100%;
+    height: 200px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+.mid1child p{
+    font-size: 45px;
+  font-family: 'georgia';
+  font-weight: bold;
+  text-align: center;
+}
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search input{
+    width: 260px;
+    height: 40px;
+    border-radius: 50px;
+    box-shadow: 0 0 20px whitesmoke(0, 0, 0, 0.3);
+    border: 1px solid transparent;
+}
+.trimorti{
+    position: absolute;
+width: 100%;
+height: 250px;
+
+display: flex;
+justify-content: center;
+align-items: end;
+}
+
+.b{
+    margin-bottom: 15px ;
+   background-color: whitesmoke;
+    width: 45%;
+    height: 200px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0.7;
+}
+.b:hover{
+    transform: scale(1.1);
+}
+.mid2{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    
+    height: 250px;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+.x{
+    background-color: #33186B;
+    width: 25%;
+    border-radius: 20px;
+    
+    box-shadow: 20px 20px 34px 30px rgba(0, 0, 0, 0.3);
+}
+.y{
+    background-color: #33186B;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   background-size: cover;
+   background-position: center;
+    transition: background-image 1s ease-in-out; 
+    border-radius: 20px; box-shadow: 20px 20px 34px 30px rgba(0, 0, 0, 0.3);
+}
+.z{
+    background-color: #33186B;
+    width: 25%;
+    border-radius: 20px;
+    box-shadow: 20px 20px 34px 30px rgba(0, 0, 0, 0.3);
+}
+.x1{
+    background-color: azure;
+    width: 40%;
+    height: 120px;
+    border-radius: 20px; margin-top: 20px;
+}
+.x2{
+    background-color: azure;
+    width: 40%;
+    height: 120px;
+    border-radius: 20px;
+    margin-top: 50px;
+}
+.xbeta{
+    
+    display:flex;
+    justify-content: space-around;
+}
+.mid2con{
+    display: block;
+}
+.z1{
+    background-color: white;
+    width: 80%;
+    height: 150px;
+    border-radius: 20px;
+}
+.zpap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body class="boady"> 
+    <div class="mid">
+        <div class="header">
+            <p>MausamForcast</p>
+        </div>
+        <div class="mid1">
+            <div class="mid1child">
+                <p class="uthar">Discover the Weather in you city </p>
+            </div>
+            <div class="search">
+                <input type="text" style="text-align: center;" placeholder="Search your City">
+            </div>
+            <div class="trimorti">
+                
+                <div class="b"></div>
+               
+            </div>
+        </div>
+        <div class="mid2">
+            <div class="x">
+                <div class="xbeta"><div class="x1">
+
+                </div>
+                <div class="x2">
+
+                </div></div>
+                <div class="mid2con">
+                    
+                </div>
+            </div>
+            <div class="y" id="backgroundContainer">
+                
+            </div>
+            <div class="z">
+                <div class="zpap"><div class="z1">
+                    
+                </div></div>
+            </div>
+        </div>
+        <div class="footer" style="font-family: Georgia, serif; color: white;">
+            <div class="container">
+              <footer class="py-3 my-4">
+                <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                  <li  class="nav-item"><a href="https://www.linkedin.com/in/shashwat-mishra-63aa2b247/" class="nav-link px-2 text-body-secondary " style="color: wheat;">LinkedIn</a></li>
+                  <li class="nav-item"><a href="https://twitter.com/Shashwa90475936" class="nav-link px-2 text-body-secondary">Twitter</a></li>
+                  <li class="nav-item"><a href="https://github.com/shashwat0418" class="nav-link px-2 text-body-secondary">GitHub</a></li>
+                  <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Instagram</a></li>
+                </ul>
+                <a style="text-decoration: none;" href="https://shashwat0418.github.io/Shashwat-portfolio-/">
+                  <p class="text-center text-body-secondary">SHASHWAT MISHRA</p>
+                </a>
+              </footer>
+            </div>
+          </div>
+          
+        
+    </div>
+    <script>document.addEventListener("DOMContentLoaded", function() {
+        updateBackground();
+        setInterval(updateBackground, 60000); // Update every minute
+      });
+      
+      function updateBackground() {
+        var backgroundContainer = document.getElementById("backgroundContainer");
+        var currentHour = new Date().getHours();
+        var backgroundImage;
+      
+        if (currentHour >= 6 && currentHour < 12) {
+          // Morning
+          backgroundImage = "morning.jpg";
+        } else if (currentHour >= 12 && currentHour < 18) {
+          // Afternoon
+          backgroundImage = "afternoon.jpeg"
+        } else {
+          // Night
+          backgroundImage = "night.jpeg";
+        }
+      
+        backgroundContainer.style.backgroundImage = "url('" + backgroundImage + "')";
+      }
+      </script>
+</body>
+</html>
