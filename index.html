@@ -47,6 +47,11 @@ color: aliceblue;
   background-position: center; 
   background-repeat: no-repeat; 
 }
+#mid1{
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+}
 .mid1child{
     width: 100%;
     height: 200px;
@@ -106,6 +111,10 @@ align-items: end;
     margin-top: 20px;
     border-radius: 20px;
 }
+.b2{
+  text-align: center;
+  margin-top: 30px;
+}
 .x{
     background-color: #33186B;
     width: 25%;
@@ -129,19 +138,31 @@ align-items: end;
     width: 25%;
     border-radius: 20px;
     box-shadow: 20px 20px 34px 30px rgba(0, 0, 0, 0.3);
+    color: black;
+    text-align: center;
+          font-family: Georgia, serif;
+          font-size: 16px; 
 }
 .x1{
-    background-color: azure;
+    background-color: #0F1035;
     width: 40%;
     height: 120px;
     border-radius: 20px; margin-top: 20px;
+    text-align: center;
+    color: black;
+          font-family: Georgia, serif;
+          font-size: 16px; 
 }
 .x2{
-    background-color: azure;
+    background-color: #0F1035;
     width: 40%;
     height: 120px;
     border-radius: 20px;
     margin-top: 50px;
+    text-align: center;
+    color: black;
+          font-family: Georgia, serif;
+          font-size: 16px; 
 }
 .xbeta{
     
@@ -152,7 +173,7 @@ align-items: end;
     display: block;
 }
 .z1{
-    background-color: white;
+    background-color: #0F1035;
     width: 80%;
     height: 150px;
     border-radius: 20px;
@@ -163,6 +184,16 @@ align-items: end;
     align-items: center;
     margin-top: 20px;
 }
+#temperature  {
+          color: black;
+          font-family: Georgia, serif;
+          font-size: 56px; 
+        }
+        .footer{
+          background-color: bisque;
+          border-radius: 20px;
+        }
+       
     </style>
 </head>
 <body class="boady"> 
@@ -175,21 +206,29 @@ align-items: end;
                 <p class="uthar">Discover the Weather in you city </p>
             </div>
             <div class="search">
-                <input type="text" style="text-align: center;" placeholder="Search your City">
-            </div>
-            <div class="trimorti">
-                
-                <div class="b"></div>
+                <input type="text" id="cityInput" style="text-align: center;" placeholder="Search your City">
                
+            </div>
+            <div class="trimorti" id="mid1">
+                <div class="b" id="mid1">
+                  <div class="b2" id="weather-container">
+                    
+                    <p><span id="temperature"></span> </p>
+                    <h3 id="cityName"></h3>
+                  </div>    
+                </div>
             </div>
         </div>
         <div class="mid2">
             <div class="x">
-                <div class="xbeta"><div class="x1">
-
+                <div class="xbeta">
+                  <div class="x1">
+                  <p><strong style="color: white;">Humidity</strong></p>
+                  <p><span style="color: white;" id="humidity"></span> </p>
                 </div>
                 <div class="x2">
-
+                  <p><strong style="color: white;">Wind Spped</strong></p>
+                  <p> <span style="color: white;" id="windSpeed"></span> </p>
                 </div></div>
                 <div class="mid2con">
                     
@@ -199,8 +238,10 @@ align-items: end;
                 
             </div>
             <div class="z">
-                <div class="zpap"><div class="z1">
-                    
+                <div class="zpap">
+                  <div class="z1">
+                    <p><strong style="color: white;">Date/Time</strong></p><br>
+                    <p><span id="localTime" style="color: white;"></span></p>
                 </div></div>
             </div>
         </div>
@@ -222,12 +263,37 @@ align-items: end;
           
         
     </div>
-    <script>document.addEventListener("DOMContentLoaded", function() {
-        updateBackground();
-        setInterval(updateBackground, 60000); 
-      });
-      
-      function updateBackground() {
+    <script>
+      function bck(weatherData) {
+        var mid1Container = document.querySelector(".b");
+        var backgroundImage;
+
+        switch (weatherData.weather[0].main) {
+          case 'Clouds':
+            backgroundImage = "cloud,jpg";
+            break;
+          case 'Rain':
+            backgroundImage = "rain.jpeg";
+            break;
+          case 'Mist':
+            backgroundImage = "mist.png";
+            break;
+          case 'Snow':
+            backgroundImage = "snow.png";
+            break;
+          case 'Clear':
+            backgroundImage = "clear.jpeg";
+            break;
+          default:
+            backgroundImage = "clear.jpeg";
+        }
+
+        mid1Container.style.backgroundImage = `url('${backgroundImage}')`;
+      }
+
+
+
+       function updateBackground() {
         var backgroundContainer = document.getElementById("backgroundContainer");
         var currentHour = new Date().getHours();
         var backgroundImage;
@@ -240,6 +306,58 @@ align-items: end;
         }
         backgroundContainer.style.backgroundImage = "url('" + backgroundImage + "')";
       }
+
+      
+
+      document.addEventListener("DOMContentLoaded", function() {
+        updateBackground();
+        setInterval(updateBackground, 60000);
+      });
+
+      const localTime = document.getElementById('localTime');
+      const inputBox = document.getElementById('cityInput');
+      const weatherIcon = document.getElementById('weather-icon');
+      const temperature = document.getElementById('temperature');
+      const humidity = document.getElementById('humidity');
+      const windSpeed = document.getElementById('windSpeed');
+      const cityName = document.getElementById('cityName');
+
+      async function checkWeather(city) {
+        const apiKey = "34cf21d6c9155ee4cbe5a81fe7d263cc";
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+        const timezoneDbApiKey = "FCI4RQ5SNTIC";
+
+        try {
+          const weatherData = await fetch(url).then(response => response.json());
+
+          cityName.textContent = ` ${weatherData.name}, ${weatherData.sys.country}`;
+          temperature.textContent = `${Math.round(weatherData.main.temp - 273.15)}°C`;
+          humidity.textContent = `${weatherData.main.humidity}%`;
+          windSpeed.textContent = `${weatherData.wind.speed} Km/hr`;
+
+          const timezoneUrl = `https://api.timezonedb.com/v2.1/get-time-zone?key=${timezoneDbApiKey}&format=json&by=position&lat=${weatherData.coord.lat}&lng=${weatherData.coord.lon}`;
+          const timezoneData = await fetch(timezoneUrl).then(response => response.json());
+
+          localTime.textContent = new Date(timezoneData.timestamp * 1000).toLocaleString();
+
+          bck(weatherData);
+
+        } catch (error) {
+          console.error('Error fetching weather data:', error);
+        }
+      }
+
+      inputBox.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+          checkWeather(inputBox.value);
+        }
+      });
       </script>
 </body>
 </html>
+
+
+
+
+
+
